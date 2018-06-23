@@ -50,7 +50,7 @@ namespace MIBAgent
             Console.WriteLine("Default Gateway: {0}", nic_data[1]);
             Console.WriteLine("NIC Speed Current Approx Mbps : {0}", nic_data[5]);
             Console.WriteLine("CPU Model: {0}", p.GetCPUModel());
-            Console.WriteLine("RAM: {0}MB ({1}GB)", p.GetTotalMemoryInMegaBytes(), p.GetTotalMemoryInGigaBytes());
+            Console.WriteLine("RAM: {0}MBs ({1}GBs)", p.GetTotalMemoryInMegaBytes(), p.GetTotalMemoryInGigaBytes());
             Console.WriteLine("CPU ClockSpeed: {0}", p.GetMaxClockSpeed());
 
             Console.ReadKey();
