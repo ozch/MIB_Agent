@@ -33,7 +33,6 @@ namespace MIBAgent
 {
     class InitialDataCollector
     {
-        
 
 
         //The function GetOSName() returns friendly Windows OS Version name make it easier to identify
@@ -98,30 +97,30 @@ namespace MIBAgent
         //MAC address is in the following form  "28C63F2056CF" 
         public string GetMacAddress()
         {
-            string MACAddresses = string.Empty;
+            string mac_addresses = string.Empty;
 
-            foreach (NetworkInterface NIC in NetworkInterface.GetAllNetworkInterfaces())
+            foreach (NetworkInterface nic in NetworkInterface.GetAllNetworkInterfaces())
             {
                 //Checking which NIC is UP
-                if (NIC.OperationalStatus == OperationalStatus.Up)
+                if (nic.OperationalStatus == OperationalStatus.Up)
                 {
                     //Get the Mac Address of First NIC which is UP and Break the Loop
                     //Only Getting First IP
-                    MACAddresses += NIC.GetPhysicalAddress().ToString();
+                    mac_addresses += nic.GetPhysicalAddress().ToString();
                     break;
                 }
             }
 
-            return MACAddresses;
+            return mac_addresses;
         }
 
 
         //This Function GetLocalIPAddress() Return the IP address avoiding get VMWare host or other invalid IP address.
         public string GetLocalIpAddress()
         {
-            UnicastIPAddressInformation mostSuitableIp = null;
-            var networkInterfaces = NetworkInterface.GetAllNetworkInterfaces();
-            foreach (var network in networkInterfaces)
+            UnicastIPAddressInformation most_suit_ip = null;
+            var network_interfaces = NetworkInterface.GetAllNetworkInterfaces();
+            foreach (var network in network_interfaces)
             {
                 //Skipping Down NICs 
                 if (network.OperationalStatus != OperationalStatus.Up)
@@ -142,15 +141,15 @@ namespace MIBAgent
 
                     if (!address.IsDnsEligible)
                     {
-                        if (mostSuitableIp == null)
-                            mostSuitableIp = address;
+                        if (most_suit_ip == null)
+                            most_suit_ip = address;
                         continue;
                     }
                     // The best IP is the IP got from DHCP server
                     if (address.PrefixOrigin != PrefixOrigin.Dhcp)
                     {
-                        if (mostSuitableIp == null || !mostSuitableIp.IsDnsEligible)
-                            mostSuitableIp = address;
+                        if (most_suit_ip == null || !most_suit_ip.IsDnsEligible)
+                            most_suit_ip = address;
                         continue;
                     }
 
@@ -158,7 +157,7 @@ namespace MIBAgent
                 }
             }
 
-            return mostSuitableIp != null ? mostSuitableIp.Address.ToString() : "Null";
+            return most_suit_ip != null ? most_suit_ip.Address.ToString() : "Null";
         }
 
 
@@ -183,38 +182,38 @@ namespace MIBAgent
         {
             UnicastIPAddressInformation unicast = null;
             string[] info = { "Null", "Null", "Null", "Null", "Null", "Null" };
-            var networkInterfaces = NetworkInterface.GetAllNetworkInterfaces();
-            foreach (var Interface in networkInterfaces)
+            var network_interfaces = NetworkInterface.GetAllNetworkInterfaces();
+            foreach (var net_interface in network_interfaces)
             {
-                if (Interface.OperationalStatus != OperationalStatus.Up)
+                if (net_interface.OperationalStatus != OperationalStatus.Up)
                     continue;
 
-                var properties = Interface.GetIPProperties();
+                var properties = net_interface.GetIPProperties();
 
                 if (properties.GatewayAddresses.Count == 0)
                     continue;
 
-                foreach (var Address in properties.UnicastAddresses)
+                foreach (var address in properties.UnicastAddresses)
                 {
-                    if (Address.Address.AddressFamily != AddressFamily.InterNetwork)
+                    if (address.Address.AddressFamily != AddressFamily.InterNetwork)
                         continue;
 
-                    if (IPAddress.IsLoopback(Address.Address))
+                    if (IPAddress.IsLoopback(address.Address))
                         continue;
 
-                    unicast = Address;
+                    unicast = address;
 
-                    IPInterfaceProperties adapterProperties = Interface.GetIPProperties();
+                    IPInterfaceProperties adapterProperties = net_interface.GetIPProperties();
                     GatewayIPAddressInformationCollection gw_addresses = adapterProperties.GatewayAddresses;
 
-                    int nic_speed = Convert.ToInt32(Interface.Speed.ToString());
+                    int nic_speed = Convert.ToInt32(net_interface.Speed.ToString());
 
                     info[5] = Convert.ToString((nic_speed) / 1048576);
-                    info[4] = Interface.Name;
-                    info[3] = Interface.GetPhysicalAddress().ToString(); //MAC Address
+                    info[4] = net_interface.Name;
+                    info[3] = net_interface.GetPhysicalAddress().ToString(); //MAC Address
                     info[2] = unicast.IPv4Mask.ToString(); //SubnetMask
                     info[1] = gw_addresses[0].Address.ToString();//Gateway
-                    info[0] = Address.Address.ToString(); //IP Address 
+                    info[0] = address.Address.ToString(); //IP Address 
                     return info;
                 }
             }

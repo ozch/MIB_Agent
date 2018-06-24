@@ -44,7 +44,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TempMain.cs" />
+    <Compile Include="OSProcessMonitor.cs" />
     <Compile Include="InitialDataCollector.cs" />
+    <Compile Include="OSResourceMonitor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
