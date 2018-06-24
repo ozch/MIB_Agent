@@ -33,28 +33,7 @@ namespace MIBAgent
 {
     class InitialDataCollector
     {
-        static void Main(string[] args)
-        {
-            InitialDataCollector p = new InitialDataCollector();
-            string[] nic_data = p.GetInterfaceCardInfo();
-            Console.WriteLine("OSVersion: {0}", p.GetOSVersion());
-            Console.WriteLine("OSName: {0}", p.GetOSName());
-            Console.WriteLine("MachineName: {0}", p.GetMachineName());
-            Console.WriteLine("Cores (Logical+Physcial): {0}", p.GetCoreCount());
-            Console.WriteLine("UserName: {0}", p.GetUserName());
-            Console.WriteLine("System Architecture Type: {0}", p.GetSystemType());
-            Console.WriteLine("NIC Type: {0}", nic_data[4]);
-            Console.WriteLine("MAC Address: {0}", nic_data[3]);
-            Console.WriteLine("Local IP Address: {0}", nic_data[0]);
-            Console.WriteLine("Subnet Mask: {0}", nic_data[2]);
-            Console.WriteLine("Default Gateway: {0}", nic_data[1]);
-            Console.WriteLine("NIC Speed Current Approx Mbps : {0}", nic_data[5]);
-            Console.WriteLine("CPU Model: {0}", p.GetCPUModel());
-            Console.WriteLine("RAM: {0}MBs ({1}GBs)", p.GetTotalMemoryInMegaBytes(), p.GetTotalMemoryInGigaBytes());
-            Console.WriteLine("CPU ClockSpeed: {0}", p.GetMaxClockSpeed());
-
-            Console.ReadKey();
-        }
+        
 
 
         //The function GetOSName() returns friendly Windows OS Version name make it easier to identify
@@ -144,6 +123,7 @@ namespace MIBAgent
             var networkInterfaces = NetworkInterface.GetAllNetworkInterfaces();
             foreach (var network in networkInterfaces)
             {
+                //Skipping Down NICs 
                 if (network.OperationalStatus != OperationalStatus.Up)
                     continue;
 
@@ -193,7 +173,7 @@ namespace MIBAgent
          * Index 4 = NIC Type
          * Index 5 = Speed MB's
          * * * * * * * Caution * * * * * * *
-         * This function perform the functionality of 4 seperate function
+         * This function perform the functionality of 6 seperate function
          * and is availbe to increase the performance of the program
          * For finding IP address i recommand GetLocalIPAddress() Method
          * because it's more reliable
@@ -288,6 +268,30 @@ namespace MIBAgent
             //Divid by 10^3 to Conver MHz into GHz
             double max_sp_d = Math.Round(((double)max_sp) / 1000, 2);
             return max_sp_d; //Converting in GHz
+        }
+        public string GetMachineInfo()
+        {
+            
+            string[] nic_data = GetInterfaceCardInfo();
+            Console.WriteLine("Please Wait Getting Details...\n");
+            string result = "============================================" 
+                + "\nOSVersion: " + GetOSVersion()
+                + "\nOSName: " + GetOSName()
+                + "\nMachineName: " + GetMachineName()
+                + "\nCores (Logical and Physcial): " + GetCoreCount()
+                + "\nUserName: " + GetUserName()
+                + "\nSystem Architecture Type: " + GetSystemType()
+                + "\nNIC Type: " + nic_data[4]
+                + "\nMAC Address: " + nic_data[3]
+                + "\nLocal IP Address: " + nic_data[0]
+                + "\nSubnet Mask: " + nic_data[2]
+                + "\nDefault Gateway: " + nic_data[1]
+                + "\nNIC Speed Current Approx Mbps : " + nic_data[5]
+                + "\nCPU Model: " + GetCPUModel()
+                + "\nRAM (GBs): " + GetTotalMemoryInGigaBytes()
+                + "\nCPU ClockSpeed: " + GetMaxClockSpeed() + "\n";
+            Console.WriteLine(result);
+            return result;
         }
 
     }
