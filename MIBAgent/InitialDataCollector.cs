@@ -268,7 +268,7 @@ namespace MIBAgent
             double max_sp_d = Math.Round(((double)max_sp) / 1000, 2);
             return max_sp_d; //Converting in GHz
         }
-        public string GetMachineInfo()
+        public string GetString()
         {
             
             string[] nic_data = GetInterfaceCardInfo();
@@ -290,6 +290,81 @@ namespace MIBAgent
                 + "\nRAM (GBs): " + GetTotalMemoryInGigaBytes()
                 + "\nCPU ClockSpeed: " + GetMaxClockSpeed() + "\n";
             Console.WriteLine(result);
+            Console.ReadKey();
+            return result;
+        }
+        /*
+{
+  "MachineInfo": {
+    "OSVer": "Microsoft Windows NT 6.3.9600.0",
+    "OSN": "Microsoft Windows 8.1 Pro",
+    "MN": "PERSONAL-PC",
+    "Cor": "8",
+    "UN": "UZAIR AEZAD",
+    "SysArcType": "x64",
+    "nicType": "Wi-Fi",
+    "MACAdd": "002682531B3C",
+    "LocalIP": "192.168.1.7",
+    "SubnetMask": "255.255.255.0",
+    "DefGateway": "192.168.1.1",
+    "NICCurSpeed": "286",
+    "CPUModel": "Intel(R) Core(TM) i7 CPU       Q 720  @ 1.60GHz",
+    "ram": "4",
+    "CPUClock": "1.6"
+  }
+}
+         * 
+         * */
+        public string GetJson()
+        {
+
+            string[] nic_data = GetInterfaceCardInfo();
+            Console.WriteLine("Please Wait Getting Json...\n");
+            string result = "{"
+                + "\"MachineInfo\": {"
+                + "\"OSVer\": \"" + GetOSVersion() + "\","
+                + "\"OSN\": \"" + GetOSName() + "\","
+                + "\"MN\": \"" + GetMachineName() + "\","
+                + "\"Cor\": \"" + GetCoreCount() + "\","
+                + "\"UN\": \"" + GetUserName() + "\","
+                + "\"SysArcType\": \"" + GetSystemType() + "\","
+                + "\"nicType\": \"" + nic_data[4] + "\","
+                + "\"MACAdd\": \"" + nic_data[3] + "\","
+                + "\"LocalIP\": \"" + nic_data[0] + "\","
+                + "\"SubnetMask\": \"" + nic_data[2] + "\","
+                + "\"DefGateway\": \"" + nic_data[1] + "\","
+                + "\"NICCurSpeed\": \"" + nic_data[5] + "\","
+                + "\"CPUModel\": \"" + GetCPUModel() + "\","
+                + "\"ram\": \"" + GetTotalMemoryInGigaBytes() + "\","
+                + "\"CPUClock\": \"" + GetMaxClockSpeed() + "\""
+                + "}"
+                + "}";
+            return result;
+        }
+        public string GetJsonPretty()
+        {
+
+            string[] nic_data = GetInterfaceCardInfo();
+            Console.WriteLine("Please Wait Getting Json...\n");
+            string result = "{\n"
+                + "\"MachineInfo\": {"
+                + "\n\"OSVer\": \"" + GetOSVersion() + "\","
+                + "\n\"OSN\": \"" + GetOSName() + "\","
+                + "\n\"MN\": \"" + GetMachineName() + "\","
+                + "\n\"Cor\": \"" + GetCoreCount() + "\","
+                + "\n\"UN\": \"" + GetUserName() + "\","
+                + "\n\"SysArcType\": \"" + GetSystemType() + "\","
+                + "\n\"nicType\": \"" + nic_data[4] + "\","
+                + "\n\"MACAdd\": \"" + nic_data[3] + "\","
+                + "\n\"LocalIP\": \"" + nic_data[0] + "\","
+                + "\n\"SubnetMask\": \"" + nic_data[2] + "\","
+                + "\n\"DefGateway\": \"" + nic_data[1] + "\","
+                + "\n\"NICCurSpeed\": \"" + nic_data[5] + "\","
+                + "\n\"CPUModel\": \"" + GetCPUModel() + "\","
+                + "\n\"ram\": \"" + GetTotalMemoryInGigaBytes() + "\","
+                + "\n\"CPUClock\": \"" + GetMaxClockSpeed() + "\""
+                + "\n}"
+                + "\n}";
             return result;
         }
 

@@ -8,10 +8,13 @@ namespace MIBAgent
 {
     class TempMain
     {
-        //static void Main(string[] args)
-        //{
-
-        //}
+        public static void Main(string[] args)
+        {
+            
+                OSProcessMonitor orm = new OSProcessMonitor();
+                orm.GetString();
+             
+        }
     }
 }
 

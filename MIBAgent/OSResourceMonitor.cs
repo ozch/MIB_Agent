@@ -30,7 +30,10 @@ namespace MIBAgent
             double mem_per = Math.Round((mem_uti/mem_size)*100, 2);
             return mem_per;
         }
-
+        public double GetAvailableRamPercentage()
+        {
+            return 100 - GetUsedRamPercent();
+        }
 
         //This function GetUsedRamSize() returns the Amount of Ram used by processes in GBs
         public double GetUsedRamSize()
@@ -42,6 +45,11 @@ namespace MIBAgent
             double mem_free_gb = Math.Round(mem_free_mb/1024, 2);
             double mem_uti_gb = mem_size - mem_free_gb;
             return mem_uti_gb;
+        }
+
+        public double GetAvailableRamSize()
+        {
+            return mem_size - GetUsedRamSize();
         }
 
         /*
@@ -122,6 +130,49 @@ namespace MIBAgent
             double max_sp_d = Math.Round(((double)max_sp) / 1000, 2);
             return max_sp_d; //Converting in GHz
         }
+
+        public string GetString()
+        {
+
+            Console.WriteLine("Getting Resource Info String");
+            string result = "\n==========================="
+                + "\nRam used(GB): " + GetUsedRamSize()
+                + "\nRam used(Percent): " + GetUsedRamPercent() + "%"
+                + "\nAvailable Ram Percentage: " + GetAvailableRamPercentage() + "%"
+                + "\nAvailable Ram Size: " + GetAvailableRamSize()
+                //+ "\nCurrent Clock Speed" + GetCurrentClockSpeed()
+                + "\nCPU Load: " + GetCPULoad()
+            ;
+            Console.WriteLine(result);
+            return result;
+        }
+
+        /*
+{
+  "ResourceInfo": {
+    "RamUsedinGB": "3.06",
+    "RamUsedinPercent": "76.69",
+    "AvailRamPercent": "23.31",
+    "AvailRamSize": "0.93",
+    "CPULoad": "5"
+  }
+}
+         * */
+        public string GetJson()
+        {
+            string result = "{ \"ResourceInfo\": {\n"
+                + "\n\"RamUsedinGB\": \"" + GetUsedRamSize() + "\","
+                + "\n\"RamUsedinPercent\": \"" + GetUsedRamPercent() + "\","
+                + "\n\"AvailRamPercent\": \"" + GetAvailableRamPercentage() + "\","
+                + "\n\"AvailRamSize\": \"" + GetAvailableRamSize() + "\","
+                //+ "\nCurrent Clock Speed" + GetCurrentClockSpeed()
+                + "\n\"CPULoad\": \"" + GetCPULoad() + "\""
+                +"}\n}"
+            ;
+            Console.WriteLine(result);
+            return result;
+        }
+
     }
 
 }
