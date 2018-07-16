@@ -141,35 +141,31 @@ namespace MIBAgent
                 + "\nAvailable Ram Percentage: " + GetAvailableRamPercentage() + "%"
                 + "\nAvailable Ram Size: " + GetAvailableRamSize()
                 //+ "\nCurrent Clock Speed" + GetCurrentClockSpeed()
-                + "\nCPU Load: " + GetCPULoad()
+                + "\nCPU Load: " + GetCPULoad() + "%"
             ;
-            Console.WriteLine(result);
             return result;
         }
 
         /*
 {
-  "ResourceInfo": {
     "RamUsedinGB": "3.06",
     "RamUsedinPercent": "76.69",
     "AvailRamPercent": "23.31",
     "AvailRamSize": "0.93",
     "CPULoad": "5"
   }
-}
+
          * */
         public string GetJson()
         {
-            string result = "{ \"ResourceInfo\": {\n"
-                + "\n\"RamUsedinGB\": \"" + GetUsedRamSize() + "\","
+            string result = "{"
+                + "\"RamUsedinGB\": \"" + GetUsedRamSize() + "\","
                 + "\n\"RamUsedinPercent\": \"" + GetUsedRamPercent() + "\","
                 + "\n\"AvailRamPercent\": \"" + GetAvailableRamPercentage() + "\","
                 + "\n\"AvailRamSize\": \"" + GetAvailableRamSize() + "\","
                 //+ "\nCurrent Clock Speed" + GetCurrentClockSpeed()
-                + "\n\"CPULoad\": \"" + GetCPULoad() + "\""
-                +"}\n}"
+                + "\n\"CPULoad\": \"" + GetCPULoad() + "\"}"
             ;
-            Console.WriteLine(result);
             return result;
         }
 

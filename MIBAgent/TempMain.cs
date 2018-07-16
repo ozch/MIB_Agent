@@ -10,10 +10,10 @@ namespace MIBAgent
     {
         public static void Main(string[] args)
         {
-            
-                OSProcessMonitor orm = new OSProcessMonitor();
-                orm.GetString();
-             
+
+            InitialDataCollector orm = new InitialDataCollector();
+                Console.WriteLine(orm.GetJsonPretty());
+                Console.ReadKey();
         }
     }
 }

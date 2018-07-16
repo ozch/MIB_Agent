@@ -289,8 +289,6 @@ namespace MIBAgent
                 + "\nCPU Model: " + GetCPUModel()
                 + "\nRAM (GBs): " + GetTotalMemoryInGigaBytes()
                 + "\nCPU ClockSpeed: " + GetMaxClockSpeed() + "\n";
-            Console.WriteLine(result);
-            Console.ReadKey();
             return result;
         }
         /*
@@ -321,7 +319,7 @@ namespace MIBAgent
             string[] nic_data = GetInterfaceCardInfo();
             Console.WriteLine("Please Wait Getting Json...\n");
             string result = "{"
-                + "\"MachineInfo\": {"
+
                 + "\"OSVer\": \"" + GetOSVersion() + "\","
                 + "\"OSN\": \"" + GetOSName() + "\","
                 + "\"MN\": \"" + GetMachineName() + "\","
@@ -337,7 +335,6 @@ namespace MIBAgent
                 + "\"CPUModel\": \"" + GetCPUModel() + "\","
                 + "\"ram\": \"" + GetTotalMemoryInGigaBytes() + "\","
                 + "\"CPUClock\": \"" + GetMaxClockSpeed() + "\""
-                + "}"
                 + "}";
             return result;
         }
@@ -346,8 +343,7 @@ namespace MIBAgent
 
             string[] nic_data = GetInterfaceCardInfo();
             Console.WriteLine("Please Wait Getting Json...\n");
-            string result = "{\n"
-                + "\"MachineInfo\": {"
+            string result = "{"
                 + "\n\"OSVer\": \"" + GetOSVersion() + "\","
                 + "\n\"OSN\": \"" + GetOSName() + "\","
                 + "\n\"MN\": \"" + GetMachineName() + "\","
@@ -363,7 +359,6 @@ namespace MIBAgent
                 + "\n\"CPUModel\": \"" + GetCPUModel() + "\","
                 + "\n\"ram\": \"" + GetTotalMemoryInGigaBytes() + "\","
                 + "\n\"CPUClock\": \"" + GetMaxClockSpeed() + "\""
-                + "\n}"
                 + "\n}";
             return result;
         }
