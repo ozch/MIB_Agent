@@ -1,11 +1,38 @@
-C:\Users\UZAIR AEZAD\Documents\Visual Studio 2013\Projects\MIB_Agent-master\MIBAgent\bin\Debug\MIBAgent.exe.config
-C:\Users\UZAIR AEZAD\Documents\Visual Studio 2013\Projects\MIB_Agent-master\MIBAgent\obj\Debug\MIBAgent.exe
-C:\Users\UZAIR AEZAD\Documents\Visual Studio 2013\Projects\MIB_Agent-master\MIBAgent\obj\Debug\MIBAgent.pdb
-C:\Users\UZAIR AEZAD\Documents\Visual Studio 2013\Projects\MIB_Agent-master\MIBAgent\bin\Debug\MIBAgent.exe
-C:\Users\UZAIR AEZAD\Documents\Visual Studio 2013\Projects\MIB_Agent-master\MIBAgent\bin\Debug\MIBAgent.pdb
-C:\Users\Osama Chaudhary\documents\visual studio 2013\Projects\MiBAgent\MIBAgent\bin\Debug\MIBAgent.exe.config
-C:\Users\Osama Chaudhary\documents\visual studio 2013\Projects\MiBAgent\MIBAgent\bin\Debug\MIBAgent.exe
-C:\Users\Osama Chaudhary\documents\visual studio 2013\Projects\MiBAgent\MIBAgent\bin\Debug\MIBAgent.pdb
-C:\Users\Osama Chaudhary\documents\visual studio 2013\Projects\MiBAgent\MIBAgent\obj\Debug\MIBAgent.exe
-C:\Users\Osama Chaudhary\documents\visual studio 2013\Projects\MiBAgent\MIBAgent\obj\Debug\MIBAgent.pdb
-C:\Users\Osama Chaudhary\documents\visual studio 2013\Projects\MiBAgent\MIBAgent\obj\Debug\MIBAgent.csprojResolveAssemblyReference.cache
+c:\users\osama chaudhary\documents\visual studio 2015\Projects\MIBAgent\MIBAgent\bin\Debug\MIBAgent.exe.config
+c:\users\osama chaudhary\documents\visual studio 2015\Projects\MIBAgent\MIBAgent\obj\Debug\MIBAgent.csprojResolveAssemblyReference.cache
+c:\users\osama chaudhary\documents\visual studio 2015\Projects\MIBAgent\MIBAgent\obj\Debug\MIBAgent.csproj.MIBAgent.exe.config
+c:\users\osama chaudhary\documents\visual studio 2015\Projects\MIBAgent\MIBAgent\bin\Debug\MIBAgent.exe
+c:\users\osama chaudhary\documents\visual studio 2015\Projects\MIBAgent\MIBAgent\bin\Debug\MIBAgent.pdb
+c:\users\osama chaudhary\documents\visual studio 2015\Projects\MIBAgent\MIBAgent\bin\Debug\MySql.Data.dll
+c:\users\osama chaudhary\documents\visual studio 2015\Projects\MIBAgent\MIBAgent\bin\Debug\MySql.Data.EntityFramework.dll
+c:\users\osama chaudhary\documents\visual studio 2015\Projects\MIBAgent\MIBAgent\bin\Debug\MySQL.Data.EntityFrameworkCore.Design.dll
+c:\users\osama chaudhary\documents\visual studio 2015\Projects\MIBAgent\MIBAgent\bin\Debug\MySQL.Data.EntityFrameworkCore.dll
+c:\users\osama chaudhary\documents\visual studio 2015\Projects\MIBAgent\MIBAgent\bin\Debug\MySql.Web.dll
+c:\users\osama chaudhary\documents\visual studio 2015\Projects\MIBAgent\MIBAgent\bin\Debug\System.Management.Automation.dll
+c:\users\osama chaudhary\documents\visual studio 2015\Projects\MIBAgent\MIBAgent\bin\Debug\Google.Protobuf.dll
+c:\users\osama chaudhary\documents\visual studio 2015\Projects\MIBAgent\MIBAgent\bin\Debug\MySql.Data.xml
+c:\users\osama chaudhary\documents\visual studio 2015\Projects\MIBAgent\MIBAgent\bin\Debug\MySql.Data.EntityFramework.xml
+c:\users\osama chaudhary\documents\visual studio 2015\Projects\MIBAgent\MIBAgent\bin\Debug\MySQL.Data.EntityFrameworkCore.xml
+c:\users\osama chaudhary\documents\visual studio 2015\Projects\MIBAgent\MIBAgent\bin\Debug\MySQL.Data.EntityFrameworkCore.Design.xml
+c:\users\osama chaudhary\documents\visual studio 2015\Projects\MIBAgent\MIBAgent\bin\Debug\MySql.Web.xml
+c:\users\osama chaudhary\documents\visual studio 2015\Projects\MIBAgent\MIBAgent\obj\Debug\MIBAgent.exe
+c:\users\osama chaudhary\documents\visual studio 2015\Projects\MIBAgent\MIBAgent\obj\Debug\MIBAgent.pdb
+C:\Users\Osama Chaudhary\Source\Repos\ozch\MIB_Agent_Git\MIBAgent\bin\Debug\MIBAgent.exe.config
+C:\Users\Osama Chaudhary\Source\Repos\ozch\MIB_Agent_Git\MIBAgent\obj\Debug\MIBAgent.exe
+C:\Users\Osama Chaudhary\Source\Repos\ozch\MIB_Agent_Git\MIBAgent\obj\Debug\MIBAgent.pdb
+C:\Users\Osama Chaudhary\Source\Repos\ozch\MIB_Agent_Git\MIBAgent\bin\Debug\MIBAgent.exe
+C:\Users\Osama Chaudhary\Source\Repos\ozch\MIB_Agent_Git\MIBAgent\bin\Debug\MIBAgent.pdb
+C:\Users\Osama Chaudhary\Source\Repos\ozch\MIB_Agent_Git\MIBAgent\bin\Debug\MySql.Data.dll
+C:\Users\Osama Chaudhary\Source\Repos\ozch\MIB_Agent_Git\MIBAgent\bin\Debug\MySql.Data.EntityFramework.dll
+C:\Users\Osama Chaudhary\Source\Repos\ozch\MIB_Agent_Git\MIBAgent\bin\Debug\MySQL.Data.EntityFrameworkCore.Design.dll
+C:\Users\Osama Chaudhary\Source\Repos\ozch\MIB_Agent_Git\MIBAgent\bin\Debug\MySQL.Data.EntityFrameworkCore.dll
+C:\Users\Osama Chaudhary\Source\Repos\ozch\MIB_Agent_Git\MIBAgent\bin\Debug\MySql.Web.dll
+C:\Users\Osama Chaudhary\Source\Repos\ozch\MIB_Agent_Git\MIBAgent\bin\Debug\System.Management.Automation.dll
+C:\Users\Osama Chaudhary\Source\Repos\ozch\MIB_Agent_Git\MIBAgent\bin\Debug\Google.Protobuf.dll
+C:\Users\Osama Chaudhary\Source\Repos\ozch\MIB_Agent_Git\MIBAgent\bin\Debug\MySql.Data.xml
+C:\Users\Osama Chaudhary\Source\Repos\ozch\MIB_Agent_Git\MIBAgent\bin\Debug\MySql.Data.EntityFramework.xml
+C:\Users\Osama Chaudhary\Source\Repos\ozch\MIB_Agent_Git\MIBAgent\bin\Debug\MySQL.Data.EntityFrameworkCore.xml
+C:\Users\Osama Chaudhary\Source\Repos\ozch\MIB_Agent_Git\MIBAgent\bin\Debug\MySQL.Data.EntityFrameworkCore.Design.xml
+C:\Users\Osama Chaudhary\Source\Repos\ozch\MIB_Agent_Git\MIBAgent\bin\Debug\MySql.Web.xml
+C:\Users\Osama Chaudhary\Source\Repos\ozch\MIB_Agent_Git\MIBAgent\obj\Debug\MIBAgent.csprojResolveAssemblyReference.cache
+C:\Users\Osama Chaudhary\Source\Repos\ozch\MIB_Agent_Git\MIBAgent\obj\Debug\MIBAgent.csproj.MIBAgent.exe.config

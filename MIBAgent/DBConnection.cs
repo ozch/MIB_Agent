@@ -5,63 +5,40 @@ using System.Text;
 using System.Threading.Tasks;
 using MySql.Data;
 using MySql.Data.MySqlClient;
+
 //Working On It 
 //Osama Zubair
 namespace MIBAgent
 {
     public class DBConnection
     {
-        private DBConnection(string dbname,string server,string username,string password)
+        private MySqlConnection connection = null;
+
+        //Set these to null after production and read value for excrypted text
+        private string db_name = "mib";
+        private string pwd = "admin";
+        private string uname = "root";
+        private string server = "localhost";
+        
+        public DBConnection()
         {
-            string connstring = string.Format("Server={0}; database={1}; UID={2}; password={3}", server, db_name, uname, pwd);
+            string connstring = string.Format("Server={0};Database={1};Uid={2};pwd={3}", server, db_name, uname, pwd);
             connection = new MySqlConnection(connstring);
             connection.Open();
         }
-        
-        private static DBConnection _instance = null;
-        
-        private string db_name = "mib";
-        private string pwd = "admin";
-        private string uname = "admin";
-        private string server = "localhost";
-        
-        private MySqlConnection connection = null;
-        public MySqlConnection Connection()
-        {
-            return connection;
-        }
-
-        public bool IsConnect()
-        {
-            if (connection == null)
-            {
-                if (String.IsNullOrEmpty(db_name))
+     
+        public bool IsConnect(){
+            if (connection == null){
                     return false;
             }
             return true;
         }
-        public MySqlConnection GetConnection(){
-            
-            return connection;
-        }
-
-        public void Close()
-        {
-            connection.Close();
-        }
-
-        public string GetDatabaseName()
-        {
-            return db_name;
-        }
-        public void SetDatabaseName(string value)
-        {
-            db_name = value;
-        }
-        public void SetPassword(string value) 
-        {
-         pwd = value;
-        }
+        
+        public MySqlConnection GetConnection(){return connection;}
+        public void Close(){connection.Close();}
+        public string GetDatabaseName(){return db_name;}
+        public void SetDatabaseName(string value){db_name = value;}
+        public void SetPassword(string value) {pwd = value;}
     }
 }
 
