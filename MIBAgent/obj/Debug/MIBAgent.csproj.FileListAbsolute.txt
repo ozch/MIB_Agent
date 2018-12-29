@@ -18,8 +18,6 @@ c:\users\osama chaudhary\documents\visual studio 2015\Projects\MIBAgent\MIBAgent
 c:\users\osama chaudhary\documents\visual studio 2015\Projects\MIBAgent\MIBAgent\obj\Debug\MIBAgent.exe
 c:\users\osama chaudhary\documents\visual studio 2015\Projects\MIBAgent\MIBAgent\obj\Debug\MIBAgent.pdb
 C:\Users\Osama Chaudhary\Source\Repos\ozch\MIB_Agent_Git\MIBAgent\bin\Debug\MIBAgent.exe.config
-C:\Users\Osama Chaudhary\Source\Repos\ozch\MIB_Agent_Git\MIBAgent\obj\Debug\MIBAgent.exe
-C:\Users\Osama Chaudhary\Source\Repos\ozch\MIB_Agent_Git\MIBAgent\obj\Debug\MIBAgent.pdb
 C:\Users\Osama Chaudhary\Source\Repos\ozch\MIB_Agent_Git\MIBAgent\bin\Debug\MIBAgent.exe
 C:\Users\Osama Chaudhary\Source\Repos\ozch\MIB_Agent_Git\MIBAgent\bin\Debug\MIBAgent.pdb
 C:\Users\Osama Chaudhary\Source\Repos\ozch\MIB_Agent_Git\MIBAgent\bin\Debug\MySql.Data.dll
@@ -27,6 +25,7 @@ C:\Users\Osama Chaudhary\Source\Repos\ozch\MIB_Agent_Git\MIBAgent\bin\Debug\MySq
 C:\Users\Osama Chaudhary\Source\Repos\ozch\MIB_Agent_Git\MIBAgent\bin\Debug\MySQL.Data.EntityFrameworkCore.Design.dll
 C:\Users\Osama Chaudhary\Source\Repos\ozch\MIB_Agent_Git\MIBAgent\bin\Debug\MySQL.Data.EntityFrameworkCore.dll
 C:\Users\Osama Chaudhary\Source\Repos\ozch\MIB_Agent_Git\MIBAgent\bin\Debug\MySql.Web.dll
+C:\Users\Osama Chaudhary\Source\Repos\ozch\MIB_Agent_Git\MIBAgent\bin\Debug\Newtonsoft.Json.dll
 C:\Users\Osama Chaudhary\Source\Repos\ozch\MIB_Agent_Git\MIBAgent\bin\Debug\System.Management.Automation.dll
 C:\Users\Osama Chaudhary\Source\Repos\ozch\MIB_Agent_Git\MIBAgent\bin\Debug\Google.Protobuf.dll
 C:\Users\Osama Chaudhary\Source\Repos\ozch\MIB_Agent_Git\MIBAgent\bin\Debug\MySql.Data.xml
@@ -34,5 +33,9 @@ C:\Users\Osama Chaudhary\Source\Repos\ozch\MIB_Agent_Git\MIBAgent\bin\Debug\MySq
 C:\Users\Osama Chaudhary\Source\Repos\ozch\MIB_Agent_Git\MIBAgent\bin\Debug\MySQL.Data.EntityFrameworkCore.xml
 C:\Users\Osama Chaudhary\Source\Repos\ozch\MIB_Agent_Git\MIBAgent\bin\Debug\MySQL.Data.EntityFrameworkCore.Design.xml
 C:\Users\Osama Chaudhary\Source\Repos\ozch\MIB_Agent_Git\MIBAgent\bin\Debug\MySql.Web.xml
-C:\Users\Osama Chaudhary\Source\Repos\ozch\MIB_Agent_Git\MIBAgent\obj\Debug\MIBAgent.csprojResolveAssemblyReference.cache
+C:\Users\Osama Chaudhary\Source\Repos\ozch\MIB_Agent_Git\MIBAgent\bin\Debug\Newtonsoft.Json.pdb
+C:\Users\Osama Chaudhary\Source\Repos\ozch\MIB_Agent_Git\MIBAgent\bin\Debug\Newtonsoft.Json.xml
 C:\Users\Osama Chaudhary\Source\Repos\ozch\MIB_Agent_Git\MIBAgent\obj\Debug\MIBAgent.csproj.MIBAgent.exe.config
+C:\Users\Osama Chaudhary\Source\Repos\ozch\MIB_Agent_Git\MIBAgent\obj\Debug\MIBAgent.exe
+C:\Users\Osama Chaudhary\Source\Repos\ozch\MIB_Agent_Git\MIBAgent\obj\Debug\MIBAgent.pdb
+C:\Users\Osama Chaudhary\Source\Repos\ozch\MIB_Agent_Git\MIBAgent\obj\Debug\MIBAgent.csprojResolveAssemblyReference.cache

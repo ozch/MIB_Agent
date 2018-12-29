@@ -30,7 +30,7 @@ namespace MIBAgent
                str2 = str2.Trim(';');
                str2 = str2.Replace(";LISTENING;", ";");
                string[] lb = str2.Split(';');
-               string temp = string.Format(" \"{0}\":<\"type\":\"{1}\", \"address\":\"{2}\",\"process\":\"{3}\">,", i, lb[0], lb[1], lb[3]);
+               string temp = string.Format(" \"{0}\":<\"type\":\"{1}\", \"address\":\"{2}\",\"process\":\"{3}\">,", i, lb[0], lb[1], lb[2]);
                str = str + temp;
                i++;
            }

@@ -61,10 +61,11 @@ namespace MIBAgent
             
 
             Agent tm = new Agent();
-            //tm.InitialUpdate(db_con, mac, ip, mask, idc.GetJson());
-            //tm.ServiceUpdate(db_con, mac);
-            //tm.ProcessUpdate(db_con, mac);
-            //tm.PortUpdate(db_con, mac);
+            tm.InitialUpdate(db_con, mac, ip, mask, idc.GetJson());
+            tm.ServiceUpdate(db_con, mac);
+            tm.ProcessUpdate(db_con, mac);
+            tm.PortUpdate(db_con, mac);
+            
             while (true) {
             tm.Executioner(db_con, mac);
             System.Threading.Thread.Sleep(sleepy);
@@ -257,7 +258,7 @@ namespace MIBAgent
             }
 
             string query = string.Format("UPDATE mib.execute SET mac_address = '{0}',boot_flag = {1},service_flag = {2},kill_flag = {3},script_flag = {4},port_flag = {5},boot_command = '{6}',service_name = '{7}',kill_name = '{8}',script = '{9}', portno = {10} WHERE mac_address = '{0}'",mac,boot_flag,service_flag,kill_flag,script_flag,port_flag,boot_command,service_name,kill_name,script,port_flag);
-            Console.WriteLine(query);
+// Console.WriteLine(query);
             cmd = con.CreateCommand();
             cmd.CommandText = query;
             cmd.ExecuteNonQuery();
@@ -323,7 +324,7 @@ namespace MIBAgent
                 string query = string.Format("UPDATE mib.open_ports SET mac_address = '{0}', json = '{1}', number = {2} WHERE mac_address = '{0}'", mac, json, number);
                 cmd = con.CreateCommand();
                 cmd.CommandText = query;
-                cmd.ExecuteNonQuery();
+                //cmd.ExecuteNonQuery();
                 Console.WriteLine("Ran UPDATE");
                 return "0";
             }
