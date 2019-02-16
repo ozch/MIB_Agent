@@ -19,57 +19,60 @@ namespace MIBAgent
         static string[] nic_info = { "Null", "Null", "Null", "Null", "Null", "Null" };
         public static void Main(string[] args)
         {
+            
             //Connecting to Database for data storage
-            int sleep_time = 6000;
-            DBConnection dbc = null;
-            bool tryAgain = true;
-            while(tryAgain){
-            try{
-                dbc = new DBConnection();
-                tryAgain = false;
-              }catch(Exception e){
-                  System.Threading.Thread.Sleep(sleep_time);
-                  dbc = new DBConnection();
-                  if (dbc.IsConnect())
-                  {
-                      tryAgain = false;
-                  }
-                  else
-                  {
-                      sleep_time = sleep_time + sleep_time;
-                      if (sleep_time < 0)
-                      {
-                          sleep_time = 12000;
-                      }
+            //int sleep_time = 6000;
 
-                  }
-              }
-            }
-            
-            MySqlConnection db_con = dbc.GetConnection();
 
-            //string Query = "insert into student.studentinfo(idStudentInfo,Name,Father_Name,Age,Semester) values('" + this.IdTextBox.Text + "','" + this.NameTextBox.Text + "','" + this.FnameTextBox.Text + "','" + this.AgeTextBox.Text + "','" + this.SemesterTextBox.Text + "');";
-            //Getting device information to get started with 
-            //device identity creation
-            //identities are based on mac adress, ip_address and subnet mask all combined
-            InitialDataCollector idc = new InitialDataCollector();
-            nic_info = idc.GetInterfaceCardInfo();
-            string mac = nic_info[3];
-            string ip = nic_info[0];
-            string mask = nic_info[2];
+            //DBConnection dbc = null;
+            //bool tryAgain = true;
+            //while(tryAgain){
+            //try{
+            //    dbc = new DBConnection();
+            //    tryAgain = false;
+            //  }catch(Exception e){
+            //      System.Threading.Thread.Sleep(sleep_time);
+            //      dbc = new DBConnection();
+            //      if (dbc.IsConnect())
+            //      {
+            //          tryAgain = false;
+            //      }
+            //      else
+            //      {
+            //          sleep_time = sleep_time + sleep_time;
+            //          if (sleep_time < 0)
+            //          {
+            //              sleep_time = 12000;
+            //          }
+
+            //      }
+            //  }
+            //}
+            
+            //MySqlConnection db_con = dbc.GetConnection();
+
+            ////string Query = "insert into student.studentinfo(idStudentInfo,Name,Father_Name,Age,Semester) values('" + this.IdTextBox.Text + "','" + this.NameTextBox.Text + "','" + this.FnameTextBox.Text + "','" + this.AgeTextBox.Text + "','" + this.SemesterTextBox.Text + "');";
+            ////Getting device information to get started with 
+            ////device identity creation
+            ////identities are based on mac adress, ip_address and subnet mask all combined
+            //InitialDataCollector idc = new InitialDataCollector();
+            //nic_info = idc.GetInterfaceCardInfo();
+            //string mac = nic_info[3];
+            //string ip = nic_info[0];
+            //string mask = nic_info[2];
             
             
 
-            Agent tm = new Agent();
-            tm.InitialUpdate(db_con, mac, ip, mask, idc.GetJson());
-            tm.ServiceUpdate(db_con, mac);
-            tm.ProcessUpdate(db_con, mac);
-            tm.PortUpdate(db_con, mac);
+            //Agent tm = new Agent();
+            //tm.InitialUpdate(db_con, mac, ip, mask, idc.GetJson());
+            //tm.ServiceUpdate(db_con, mac);
+            //tm.ProcessUpdate(db_con, mac);
+            //tm.PortUpdate(db_con, mac);
             
-            while (true) {
-            tm.Executioner(db_con, mac);
-            System.Threading.Thread.Sleep(sleepy);
-            }
+            //while (true) {
+            //tm.Executioner(db_con, mac);
+            //System.Threading.Thread.Sleep(sleepy);
+            //}
             
             
 
@@ -92,8 +95,9 @@ namespace MIBAgent
             //ProcessMonitor pm = new ProcessMonitor();
             //ServiceMonitor sm = new ServiceMonitor();
             //ResourceMonitor rm = new ResourceMonitor();
-            //OpenPortScan ops = new OpenPortScan();
-            
+            OpenPortScan ops = new OpenPortScan();
+            Console.WriteLine(ops.GetJson());
+            Console.ReadKey();
 
             //TaskKill tk = new TaskKill();
             //tk.KillProcess(15072);

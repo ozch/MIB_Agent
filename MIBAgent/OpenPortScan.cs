@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,32 +13,39 @@ namespace MIBAgent
        int number = 0;
        public int GetNumber()
        {
-           return number;
+           return this.number;
        }
        public void SetNumber(int x)
        {
-           number = x;
+           this.number = x;
        }
        public string GetJson()
        {
            PowerShellExecutor pse = new PowerShellExecutor();
-           string str = "{";
+           IDictionary<int, OpenPortModel> list = new Dictionary<int, OpenPortModel>();
            int i = 0;
            string[] st = pse.RunShellScript("$nets = netstat -bano|select-string 'LISTENING|UDP'; foreach ($n in $nets)    {    $p = $n -replace ' +',' ';    $nar = $p.Split(' ');    $pname = $(Get-Process -id $nar[-1]).ProcessName;    $n -replace \"$($nar[-1])\",\"$($ppath) $($pname)\";     }").Split('\n');
+           
            foreach (var line in st.Skip(4))
            {
+               //Todo : Issue where process name is not parsed correctly
+               Console.WriteLine(line);
                string str2 = Regex.Replace(line, @"\s+", ";");
                str2 = str2.Trim(';');
                str2 = str2.Replace(";LISTENING;", ";");
                string[] lb = str2.Split(';');
-               string temp = string.Format(" \"{0}\":<\"type\":\"{1}\", \"address\":\"{2}\",\"process\":\"{3}\">,", i, lb[0], lb[1], lb[2]);
-               str = str + temp;
+                try
+                {
+                    list.Add(i, new OpenPortModel(lb[0], lb[1], lb[2]));
+                }catch(Exception e)
+                {
+                    //Hahaha
+                }
                i++;
            }
-           str = str + "}";
+           
            SetNumber(i);
-           string json = GetProcessedString(str);
-           return json;
+           return JsonConvert.SerializeObject(list);
        }
        public string GetPortProcessName(int X)
        {
@@ -50,7 +58,6 @@ namespace MIBAgent
                str2 = str2.Trim(';');
                str2 = str2.Replace(";LISTENING;", ";");
                string[] lb = str2.Split(';');
-               //string temp = string.Format(" \"{0}\":<\"type\":\"{1}\", \"address\":\"{2}\",\"process\":\"{3}\">,", i, lb[0], lb[1], lb[3]);
                string[] port = lb[1].Split(':');
                
                try{
@@ -64,20 +71,7 @@ namespace MIBAgent
            
            return proc;
        }
-       /*Return a process json string by replacing < > with { } respectively and removing last ,
-       Example : 
-        Input  = <"ip"="123","id"="2", >
-        Output = {"ip"="123","id"="2"}
-        */
-       public string GetProcessedString(string p)
-       {
-
-           p = p.Replace("<", "{");
-           p = p.Replace(">", "}");
-           int place = p.LastIndexOf(",");
-           p = p.Remove(place, 1);
-           return p;
-       }
+       
    }
    
 }

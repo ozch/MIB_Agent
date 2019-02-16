@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -59,36 +60,18 @@ namespace MIBAgent
         }
         public string GetJson()
         {
-            ManagementObjectSearcher searcher = new ManagementObjectSearcher("root\\CIMV2","SELECT * FROM Win32_PerfFormattedData_PerfProc_Process"); 
-
-            string str = "{";
+            ManagementObjectSearcher searcher = new ManagementObjectSearcher("root\\CIMV2","SELECT * FROM Win32_PerfFormattedData_PerfProc_Process");
+            IDictionary<int, ProcessModel> list = new Dictionary<int, ProcessModel>();
             int i = 0;
             foreach (ManagementObject queryObj in searcher.Get())
             {
-
-                string temp = string.Format(" \"{0}\":<\"pn\":\"{1}\", \"id\":{2},\"ru\":\"{3}MB\",\"PPT\":\"{4}\">,", i, queryObj["Name"], queryObj["IDProcess"], Math.Round(Convert.ToDouble(queryObj["WorkingSet"]) / 1048576, 0), queryObj["PercentProcessorTime"]);
+                list.Add(i, new ProcessModel(Convert.ToString(queryObj["Name"]), Convert.ToInt64(queryObj["IDProcess"]), Convert.ToInt64(Math.Round(Convert.ToDouble(queryObj["WorkingSet"]) / 1048576, 0)), Convert.ToInt32(queryObj["PercentProcessorTime"])));
                 i++;
-                str = str + temp;
             }
-            str = str + "}";
             SetNumber(i);
-            string json = GetProcessedString(str);
-            return json;
+            return JsonConvert.SerializeObject(list); ;
         }
-        /*Return a process json string by replacing < > with { } respectively and removing last ,
-        Example : 
-         Input  = <"ip"="123","id"="2", >
-         Output = {"ip"="123","id"="2"}
-         */
-        public string GetProcessedString(string p)
-        {
-            
-            p = p.Replace("<", "{");
-            p = p.Replace(">", "}");
-            int place = p.LastIndexOf(",");
-            p = p.Remove(place, 1);
-            return p;
-        }
+       
         
         public double[] GetProcessUsage(Process p)
         {

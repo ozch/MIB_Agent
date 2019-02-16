@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -174,26 +175,9 @@ namespace MIBAgent
             return result;
         }
 
-        /*
-{
-    "RamUsedinGB": "3.06",
-    "RamUsedinPercent": "76.69",
-    "AvailRamPercent": "23.31",
-    "AvailRamSize": "0.93",
-    "CPULoad": "5"
-  }
-
-         * */
         public string GetJson()
         {
-            string result = "{"
-                + "\"RamUsedinGB\": \"" + GetUsedRamSize() + "\","
-                + "\n\"RamUsedinPercent\": \"" + GetUsedRamPercent() + "\","
-                + "\n\"AvailRamPercent\": \"" + GetAvailableRamPercentage() + "\","
-                + "\n\"AvailRamSize\": \"" + GetAvailableRamSize() + "\","
-                //+ "\nCurrent Clock Speed" + GetCurrentClockSpeed()
-                + "\n\"CPULoad\": \"" + GetCPULoad() + "\"}"
-            ;
+            string result = JsonConvert.SerializeObject(new ResourceModel(GetUsedRamSize(), GetAvailableRamSize(), GetUsedRamPercent(), GetAvailableRamPercentage(), GetCPULoad()));
             return result;
         }
 

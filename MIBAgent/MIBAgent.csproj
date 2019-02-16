@@ -64,11 +64,16 @@
     <Compile Include="BootController.cs" />
     <Compile Include="DBConnection.cs" />
     <Compile Include="InitialDataCollector.cs" />
+    <Compile Include="InitialDataModel.cs" />
+    <Compile Include="OpenPortModel.cs" />
     <Compile Include="OpenPortScan.cs" />
+    <Compile Include="ProcessModel.cs" />
     <Compile Include="ProcessMonitor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResourceModel.cs" />
     <Compile Include="ResourceMonitor.cs" />
     <Compile Include="ServiceController.cs" />
+    <Compile Include="ServiceModel.cs" />
     <Compile Include="ServiceMonitor.cs" />
     <Compile Include="SudoExecutor.cs" />
     <Compile Include="TaskKill.cs" />

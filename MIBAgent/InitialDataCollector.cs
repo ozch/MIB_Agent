@@ -8,27 +8,28 @@ using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Net;
 using Microsoft.VisualBasic;
+using Newtonsoft.Json;
 /*
-    > Objective <
- This Class Only Provide you with all the methods to collect the
- system information required only once at the start of the comp-
- uter 
- >>Basic<<
- * OS Version
- * OS Name
- * System Architecture Type
- * User Name
- * PC Name (Machine Name)
- * CPU Model
- * Number of Core
- * Max Clock Speed
- * RAM Size
- >>Networking<<
- * IP Address
- * Subnet Mask
- * MAC Address
- * Default Gateway
- */
+> Objective <
+This Class Only Provide you with all the methods to collect the
+system information required only once at the start of the comp-
+uter 
+>>Basic<<
+* OS Version
+* OS Name
+* System Architecture Type
+* User Name
+* PC Name (Machine Name)
+* CPU Model
+* Number of Core
+* Max Clock Speed
+* RAM Size
+>>Networking<<
+* IP Address
+* Subnet Mask
+* MAC Address
+* Default Gateway
+*/
 namespace MIBAgent
 {
     class InitialDataCollector
@@ -292,51 +293,42 @@ namespace MIBAgent
             return result;
         }
         /*
-{
-  "MachineInfo": {
-    "OSVer": "Microsoft Windows NT 6.3.9600.0",
-    "OSN": "Microsoft Windows 8.1 Pro",
-    "MN": "PERSONAL-PC",
-    "Cor": "8",
-    "UN": "UZAIR AEZAD",
-    "SysArcType": "x64",
-    "nicType": "Wi-Fi",
-    "MACAdd": "002682531B3C",
-    "LocalIP": "192.168.1.7",
-    "SubnetMask": "255.255.255.0",
-    "DefGateway": "192.168.1.1",
-    "NICCurSpeed": "286",
-    "CPUModel": "Intel(R) Core(TM) i7 CPU       Q 720  @ 1.60GHz",
-    "ram": "4",
-    "CPUClock": "1.6"
-  }
-}
-         * 
-         * */
+        "OSVer": "Microsoft Windows NT 6.3.9600.0",
+        "OSN": "Microsoft Windows 8.1 Pro",
+        "MN": "PERSONAL-PC",
+        "Cor": "8",
+        "UN": "UZAIR AEZAD",
+        "SysArcType": "x64",
+        "nicType": "Wi-Fi",
+        "MACAdd": "002682531B3C",
+        "LocalIP": "192.168.1.7",
+        "SubnetMask": "255.255.255.0",
+        "DefGateway": "192.168.1.1",
+        "NICCurSpeed": "286",
+        "CPUModel": "Intel(R) Core(TM) i7 CPU       Q 720  @ 1.60GHz",
+        "ram": "4",
+        "CPUClock": "1.6"
+            */
         public string GetJson()
         {
-
             string[] nic_data = GetInterfaceCardInfo();
-            Console.WriteLine("Please Wait Getting Json...\n");
-            string result = "{"
-
-                + "\"OSVer\": \"" + GetOSVersion() + "\","
-                + "\"OSN\": \"" + GetOSName() + "\","
-                + "\"MN\": \"" + GetMachineName() + "\","
-                + "\"Cor\": \"" + GetCoreCount() + "\","
-                + "\"UN\": \"" + GetUserName() + "\","
-                + "\"SysArcType\": \"" + GetSystemType() + "\","
-                + "\"nicType\": \"" + nic_data[4] + "\","
-                + "\"MACAdd\": \"" + nic_data[3] + "\","
-                + "\"LocalIP\": \"" + nic_data[0] + "\","
-                + "\"SubnetMask\": \"" + nic_data[2] + "\","
-                + "\"DefGateway\": \"" + nic_data[1] + "\","
-                + "\"NICCurSpeed\": \"" + nic_data[5] + "\","
-                + "\"CPUModel\": \"" + GetCPUModel() + "\","
-                + "\"ram\": \"" + GetTotalMemoryInGigaBytes() + "\","
-                + "\"CPUClock\": \"" + GetMaxClockSpeed() + "\""
-                + "}";
-            return result;
+            InitialDataModel list = new InitialDataModel(
+               GetOSVersion(),
+               GetOSName(),
+               GetMachineName(),
+               Convert.ToInt32(GetCoreCount()),
+               GetUserName(),
+               GetSystemType(),
+               nic_data[4],
+               nic_data[3],
+               nic_data[0],
+               nic_data[2],
+               nic_data[1],
+               nic_data[5],
+               GetCPUModel(),
+               Math.Round(GetTotalMemoryInGigaBytes(),2),
+               Math.Round(GetMaxClockSpeed(),2));
+            return JsonConvert.SerializeObject(list);
         }
         public string GetJsonPretty()
         {

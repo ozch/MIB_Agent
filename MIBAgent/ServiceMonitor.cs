@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Management;
@@ -12,36 +13,30 @@ namespace MIBAgent
         private int number = 0;
         public int GetNumber()
         {
-            return number;
+            return this.number;
         }
         public void SetNumber(int x)
         {
-            number = x;
+            this.number = x;
         }
-        public string GetProcessedString(string p)
-        {
-            int place = p.LastIndexOf(",");
-            p = p.Remove(place,1);
-            return p;
-        }
+        
         public string GetJson()
         {
             try
             {
                 int i = 0;
-                string str = "{\"services\":["; 
+                IDictionary<int, ServiceModel> list = new Dictionary<int, ServiceModel>();
                 ManagementObjectSearcher searcher =new ManagementObjectSearcher("root\\CIMV2","SELECT * FROM Win32_Service");
                 foreach (ManagementObject queryObj in searcher.Get())
                 {
 
+                    list.Add(i, new ServiceModel(Convert.ToString(queryObj["Name"]), Convert.ToString(queryObj["State"])));
                     i++;
-                    str = str + string.Format("\"{0}\",",queryObj["Name"]);
+                    
 
                 }
-                str = str + "]}";
                 SetNumber(i);
-                str = GetProcessedString(str);
-                return str;
+                return JsonConvert.SerializeObject(list);
 
             }
             catch (ManagementException e)
