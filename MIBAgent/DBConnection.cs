@@ -18,7 +18,7 @@ namespace MIBAgent
         private string db_name = "mib";
         private string pwd = "admin";
         private string uname = "root";
-        private string server = "localhost";
+        private string server = "192.168.1.5";
         
         public DBConnection()
         {
