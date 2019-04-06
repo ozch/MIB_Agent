@@ -265,11 +265,11 @@ namespace MIBAgent
                 try { 
                 boot_flag = 0;
                 string query2 = string.Format("UPDATE execute SET mac_address = '{0}',boot_flag ={1},service_flag = {2},kill_flag = {3},script_flag = {4},port_flag = {5},boot_command = '{6}',service_name = '{7}',kill_name = '{8}',script = '{9}',portno={10},online=NOW() WHERE mac_address = '{0}'", mac, boot_flag, service_flag, kill_flag, script_flag, port_flag, boot_command, service_name, kill_name, script, port_flag);
-                Console.WriteLine(query2);
+                //Console.WriteLine(query2);
                 cmd = con.CreateCommand();
                 cmd.CommandText = query2;
                 cmd.ExecuteNonQuery();
-                Console.WriteLine("Ran UPDATE");
+                //Console.WriteLine("...");
                 if (boot_command.Equals("shutdown", StringComparison.InvariantCultureIgnoreCase))
                 {
                     BootController bc = new BootController();
@@ -302,12 +302,13 @@ namespace MIBAgent
                 }
             }
 
-            string query = string.Format("UPDATE mib.execute SET mac_address = '{0}',boot_flag = {1},service_flag = {2},kill_flag = {3},script_flag = {4},port_flag = {5},boot_command = '{6}',service_name = '{7}',kill_name = '{8}',script = '{9}', portno = {10},online=NOW() WHERE mac_address = '{0}'", mac,boot_flag,service_flag,kill_flag,script_flag,port_flag,boot_command,service_name,kill_name,script,port_flag);
-// Console.WriteLine(query);
+            string query = string.Format("UPDATE mib.execute SET mac_address = '{0}',boot_flag = {1},service_flag = {2},kill_flag = {3},script_flag = {4},port_flag = {5},boot_command = '{6}',service_name = '{7}',kill_name = '{8}',script = \"{9}\", portno = {10},online=NOW() WHERE mac_address = '{0}'", mac,boot_flag,service_flag,kill_flag,script_flag,port_flag,boot_command,service_name,kill_name,script,port_flag);
+            //Console.WriteLine(query);
             cmd = con.CreateCommand();
+            
             cmd.CommandText = query;
             cmd.ExecuteNonQuery();
-            Console.WriteLine("Ran UPDATE");
+            Console.Write("...");
             return "0";
         }
         public string ProcessUpdate(MySqlConnection con, string mac)
