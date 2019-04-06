@@ -18,11 +18,16 @@ namespace MIBAgent
         private string db_name = "mib";
         private string pwd = "admin";
         private string uname = "root";
-        private string server = "192.168.1.5";
-        
+        private string server = "192.168.1.20";
+        private string portno = "3306";
+        public DBConnection(string ip,string port)
+        {
+            server = ip;
+            portno = port;
+        }
         public DBConnection()
         {
-            string connstring = string.Format("Server={0};Database={1};Uid={2};pwd={3}", server, db_name, uname, pwd);
+            string connstring = string.Format("Server={0};Port={4};Database={1};Uid={2};pwd={3}", server, db_name, uname, pwd,portno);
             connection = new MySqlConnection(connstring);
             connection.Open();
         }

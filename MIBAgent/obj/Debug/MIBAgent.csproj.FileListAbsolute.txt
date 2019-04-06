@@ -52,3 +52,5 @@ C:\Users\InspironPC\Source\Repos\MIB_Agent\MIBAgent\obj\Debug\MIBAgent.csproj.Co
 C:\Users\InspironPC\Source\Repos\MIB_Agent\MIBAgent\obj\Debug\MIBAgent.csproj.CopyComplete
 C:\Users\InspironPC\Source\Repos\MIB_Agent\MIBAgent\obj\Debug\MIBAgent.exe
 C:\Users\InspironPC\Source\Repos\MIB_Agent\MIBAgent\obj\Debug\MIBAgent.pdb
+C:\Users\InspironPC\Source\Repos\MIB_Agent\MIBAgent\bin\Debug\YamlDotNet.dll
+C:\Users\InspironPC\Source\Repos\MIB_Agent\MIBAgent\bin\Debug\YamlDotNet.xml

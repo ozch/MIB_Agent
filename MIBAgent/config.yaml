@@ -1,0 +1,5 @@
+apiserver: http://192.168.1.20:8000/
+intervel: 30000
+server: 192.168.1.20
+port: 3306
+token: 68EBE700-80F7-43A4-B2C1-53AAF2B86EEC

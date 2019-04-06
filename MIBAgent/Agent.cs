@@ -8,24 +8,55 @@ using System.Threading.Tasks;
 using MySql.Data;
 using MySql.Data.MySqlClient;
 using System.Data;
-
+using System.IO;
+using YamlDotNet.RepresentationModel;
+using YamlDotNet.Serialization;
+using YamlDotNet.Serialization.NamingConventions;
+using System.Net;
 
 namespace MIBAgent
 {
     class Agent
     {
-        static int sleepy = 5000;
-        static int sleepy_update = 30000;
 
+        static int sleepy = 4500;
+        static int sleepy_update = 30000;
         static string[] nic_info = { "Null", "Null", "Null", "Null", "Null", "Null" };
         public static void Main(string[] args)
         {
+            Agent tm = new Agent();
+            InitialDataCollector idc = new InitialDataCollector();
+            nic_info = idc.GetInterfaceCardInfo();
+            string mac = nic_info[3];
+            string ip = nic_info[0];
+            string mask = nic_info[2];
+
+
+            // Need to be change to /config.yaml only
+            var file = new StreamReader(@"../../config.yaml");
+            var deserial = new DeserializerBuilder().WithNamingConvention(new CamelCaseNamingConvention()).Build();
+            var config = deserial.Deserialize<dynamic>(file);
+            string api_server = config["apiserver"];
+            string token = config["token"];
+            string request = api_server +"agent/token/"+mac + "/" + token + "/";
+            sleepy_update = Convert.ToInt16(config["intervel"]);
+            string server = config["server"];
+            string port = config["port"];
+
+            Console.WriteLine(request);
+            string token_status = tm.CheckTokenAuthentication(request);
             
-            //Connecting to Database for data storage
+            if (token_status != "200")
+            {
+                Environment.Exit(1);
+            }
+
+
+
             int sleep_time = 6000;
+            DBConnection dbc = new DBConnection(server,port);
 
 
-            DBConnection dbc = null;
             bool tryAgain = true;
             while (tryAgain)
             {
@@ -56,35 +87,30 @@ namespace MIBAgent
             }
 
             MySqlConnection db_con = dbc.GetConnection();
-
+            Console.WriteLine("Connection Established");
             //string Query = "insert into student.studentinfo(idStudentInfo,Name,Father_Name,Age,Semester) values('" + this.IdTextBox.Text + "','" + this.NameTextBox.Text + "','" + this.FnameTextBox.Text + "','" + this.AgeTextBox.Text + "','" + this.SemesterTextBox.Text + "');";
             //Getting device information to get started with 
             //device identity creation
             //identities are based on mac adress, ip_address and subnet mask all combined
-            InitialDataCollector idc = new InitialDataCollector();
-            nic_info = idc.GetInterfaceCardInfo();
-            string mac = nic_info[3];
-            string ip = nic_info[0];
-            string mask = nic_info[2];
+            
 
 
 
-            Agent tm = new Agent();
+            
             tm.InitialUpdate(db_con, mac, ip, mask, idc.GetJson());
             tm.ServiceUpdate(db_con, mac);
             tm.ProcessUpdate(db_con, mac);
-            tm.PortUpdate(db_con, mac);
             DateTime start = DateTime.Now;
             while (true)
             {
-                tm.Executioner(db_con, mac);
+                tm.Executioner(db_con, mac,tm);
                 System.Threading.Thread.Sleep(sleepy);
                 TimeSpan timeDiff = DateTime.Now - start;
                 if(timeDiff.Seconds > sleepy_update) { 
                     start = DateTime.Now;
                     tm.ServiceUpdate(db_con, mac);
                     tm.ProcessUpdate(db_con, mac);
-                    tm.PortUpdate(db_con, mac);
+                    
                 }
             }
 
@@ -123,7 +149,7 @@ namespace MIBAgent
 
 
         }
-        public string Executioner(MySqlConnection con, string mac)
+        public string Executioner(MySqlConnection con, string mac,Agent tm)
         {
 
             string stm = string.Format("SELECT * FROM mib.execute where mac_address='{0}'", mac);
@@ -181,7 +207,7 @@ namespace MIBAgent
                 {
                     service_flag = 2;
                 }
-
+                tm.ServiceUpdate(con, mac);
             }
             if (kill_flag == 1)
             {
@@ -194,6 +220,7 @@ namespace MIBAgent
                 catch(Exception){
                     kill_flag = 2;
                 }
+                tm.ProcessUpdate(con, mac);
             }
             if (script_flag == 1)
             {
@@ -237,7 +264,7 @@ namespace MIBAgent
             {
                 try { 
                 boot_flag = 0;
-                string query2 = string.Format("UPDATE execute SET mac_address = '{0}',boot_flag ={1},service_flag = {2},kill_flag = {3},script_flag = {4},port_flag = {5},boot_command = '{6}',service_name = '{7}',kill_name = '{8}',script = '{9}',portno={10} WHERE mac_address = '{0}'", mac, boot_flag, service_flag, kill_flag, script_flag, port_flag, boot_command, service_name, kill_name, script, port_flag);
+                string query2 = string.Format("UPDATE execute SET mac_address = '{0}',boot_flag ={1},service_flag = {2},kill_flag = {3},script_flag = {4},port_flag = {5},boot_command = '{6}',service_name = '{7}',kill_name = '{8}',script = '{9}',portno={10},online=NOW() WHERE mac_address = '{0}'", mac, boot_flag, service_flag, kill_flag, script_flag, port_flag, boot_command, service_name, kill_name, script, port_flag);
                 Console.WriteLine(query2);
                 cmd = con.CreateCommand();
                 cmd.CommandText = query2;
@@ -275,7 +302,7 @@ namespace MIBAgent
                 }
             }
 
-            string query = string.Format("UPDATE mib.execute SET mac_address = '{0}',boot_flag = {1},service_flag = {2},kill_flag = {3},script_flag = {4},port_flag = {5},boot_command = '{6}',service_name = '{7}',kill_name = '{8}',script = '{9}', portno = {10} WHERE mac_address = '{0}'",mac,boot_flag,service_flag,kill_flag,script_flag,port_flag,boot_command,service_name,kill_name,script,port_flag);
+            string query = string.Format("UPDATE mib.execute SET mac_address = '{0}',boot_flag = {1},service_flag = {2},kill_flag = {3},script_flag = {4},port_flag = {5},boot_command = '{6}',service_name = '{7}',kill_name = '{8}',script = '{9}', portno = {10},online=NOW() WHERE mac_address = '{0}'", mac,boot_flag,service_flag,kill_flag,script_flag,port_flag,boot_command,service_name,kill_name,script,port_flag);
 // Console.WriteLine(query);
             cmd = con.CreateCommand();
             cmd.CommandText = query;
@@ -434,6 +461,30 @@ namespace MIBAgent
                 }
                 
             
+        }
+        public string CheckTokenAuthentication(string request)
+        {
+            try
+            {
+                string webAddr = request;
+
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(webAddr);
+                httpWebRequest.ContentType = "application/json; charset=utf-8";
+                httpWebRequest.Method = "GET";
+
+                var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                {
+                    var response = streamReader.ReadToEnd();
+                    Console.WriteLine("Token Status : "+ response);
+                    return response;
+                }
+            }
+            catch (WebException ex)
+            {
+                Console.WriteLine(ex.Message);
+                return "404";
+            }
         }
     }
     
